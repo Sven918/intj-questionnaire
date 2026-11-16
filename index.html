@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>INTJ研究员资格测试</title>
+<style>
+  :root{
+    --bg1:#eef2f7; --bg2:#e3e9f2;
+    --card:#ffffff; --ink:#1f2a3d; --muted:#7a8699;
+    --accent:#34506b; --accent2:#4a6f9c; --line:#e3e8ef;
+    --ok:#1f7a4d; --mid:#b07a1f; --low:#b5433a;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{
+    margin:0; padding:0;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",Roboto,sans-serif;
+    background:linear-gradient(160deg,var(--bg1),var(--bg2));
+    color:var(--ink); line-height:1.6;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:20px 16px 48px;}
+  header{text-align:center;margin:18px 0 8px;}
+  header .kicker{font-size:12px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;}
+  header h1{font-size:26px;margin:6px 0 4px;letter-spacing:1px;}
+  header p{font-size:13px;color:var(--muted);margin:0;}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px 16px;margin:14px 0;box-shadow:0 6px 20px rgba(31,42,61,.06);
+  }
+  .q-head{display:flex;align-items:flex-start;gap:10px;}
+  .q-no{
+    flex:0 0 auto;width:28px;height:28px;border-radius:8px;background:var(--accent);color:#fff;
+    font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  }
+  .q-title{font-size:16px;font-weight:700;padding-top:1px;}
+  .opts{margin-top:12px;display:flex;flex-direction:column;gap:8px;}
+  label.opt{
+    display:flex;align-items:center;gap:10px;padding:11px 12px;
+    border:1.5px solid var(--line);border-radius:12px;cursor:pointer;
+    background:#fafbfd;transition:border-color .15s,background .15s;
+  }
+  label.opt input[type=checkbox]{
+    flex:0 0 auto;width:19px;height:19px;accent-color:var(--accent2);cursor:pointer;
+  }
+  label.opt .opt-letter{font-weight:700;color:var(--accent2);min-width:20px;}
+  label.opt .opt-text{font-size:15px;color:var(--ink);}
+  label.opt.sel{border-color:var(--accent2);background:#eef4fb;}
+  button.submit{
+    display:block;width:100%;margin:22px 0 6px;padding:15px;font-size:17px;font-weight:700;
+    color:#fff;background:var(--accent);border:none;border-radius:14px;cursor:pointer;
+    letter-spacing:2px;transition:opacity .15s;
+  }
+  button.submit:active{opacity:.85;}
+  .result{display:none;text-align:center;padding:20px 16px;margin-top:6px;}
+  .result.show{display:block;animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .result .rate{font-size:30px;font-weight:800;margin-bottom:4px;}
+  .result .sub{font-size:13px;color:var(--muted);margin-bottom:10px;}
+  .result .msg{font-size:19px;font-weight:700;}
+  .result .hint{font-size:12px;color:var(--muted);margin-top:10px;}
+  .result.ok .rate,.result.ok .msg{color:var(--ok);}
+  .result.mid .rate,.result.mid .msg{color:var(--mid);}
+  .result.low .rate,.result.low .msg{color:var(--low);}
+  button.reset{
+    margin:14px auto 0;padding:10px 22px;font-size:14px;color:var(--accent);
+    background:#fff;border:1.5px solid var(--accent);border-radius:10px;cursor:pointer;
+  }
+  footer{text-align:center;font-size:11px;color:var(--muted);margin-top:30px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Personality Test</div>
+    <h1>INTJ研究员资格测试</h1>
+    <p>共 10 题 · 每题单选 · 只有真正理解 INTJ 的人才能答对</p>
+  </header>
+
+  <form id="quiz" onsubmit="return false;">
+
+    <div class="card">
+      <div class="q-head"><span class="q-no">1</span><span class="q-title">面对一个全新的复杂问题，你的第一反应通常是？</span></div>
+      <div class="opts" data-group="q1" data-correct="A">
+        <label class="opt"><input type="checkbox" name="q1" value="A"><span class="opt-letter">A</span><span class="opt-text">先梳理整体框架和底层逻辑，再决定怎么下手</span></label>
+        <label class="opt"><input type="checkbox" name="q1" value="B"><span class="opt-letter">B</span><span class="opt-text">立刻上手试错，边做边摸索</span></label>
+        <label class="opt"><input type="checkbox" name="q1" value="C"><span class="opt-letter">C</span><span class="opt-text">先问问身边人有没有现成经验</span></label>
+        <label class="opt"><input type="checkbox" name="q1" value="D"><span class="opt-letter">D</span><span class="opt-text">凭感觉走一步看一步</span></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="q-head"><span class="q-no">2</span><span class="q-title">在团队合作中，你更倾向于？</span></div>
+      <div class="opts" data-group="q2" data-correct="B">
+        <label class="opt"><input type="checkbox" name="q2" value="A"><span class="opt-letter">A</span><span class="opt-text">主动活跃气氛，照顾每个人的情绪</span></label>
+        <label class="opt"><input type="checkbox" name="q2" value="B"><span class="opt-letter">B</span><span class="opt-text">独立负责自己的部分，并希望团队高效、严谨地运转</span></label>
+        <label class="opt"><input type="checkbox" name="q2" value="C"><span class="opt-letter">C</span><span class="opt-text">频繁沟通确认，让大家舒服最重要</span></label>
+        <label class="opt"><input type="checkbox" name="q2" value="D"><span class="opt-letter">D</span><span class="opt-text">完全听团队的安排，自己不多想</span></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="q-head"><span class="q-no">3</span><span class="q-title">面对计划之外的突发变化，你会？</span></div>
+      <div class="opts" data-group="q3" data-correct="A">
+        <label class="opt"><input type="checkbox" name="q3" value="A"><span class="opt-letter">A</span><span class="opt-text">冷静评估它对长期目标的影响，并调整原有方案</span></label>
+        <label class="opt"><input type="checkbox" name="q3" value="B"><span class="opt-letter">B</span><span class="opt-text">顺势而为，随机应变就好</span></label>
+        <label class="opt"><input type="checkbox" name="q3" value="C"><span class="opt-letter">C</span><span class="opt-text">先安抚在场所有人的情绪</span></label>
+        <label class="opt"><input type="checkbox" name="q3" value="D"><span class="opt-letter">D</span><span class="opt-text">按老办法来，别轻易改动</span></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="q-head"><span class="q-no">4</span><span class="q-title">你更喜欢的社交方式是？</span></div>
+      <div class="opts" data-group="q4" data-correct="B">
+        <label class="opt"><input type="checkbox" name="q4" value="A"><span class="opt-letter">A</span><span class="opt-text">热闹的聚会，多认识些新朋友</span></label>
+        <label class="opt"><input type="checkbox" name="q4" value="B"><span class="opt-letter">B</span><span class="opt-text">与少数志趣相投的人进行有深度的交流</span></label>
+        <label class="opt"><input type="checkbox" name="q4" value="C"><span class="opt-letter">C</span><span class="opt-text">大型活动，喜欢人群带来的热闹感</span></label>
+        <label class="opt"><input type="checkbox" name="q4" value="D"><span class="opt-letter">D</span><span class="opt-text">任何社交场合都让我兴奋</span></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="q-head"><span class="q-no">5</span><span class="q-title">做重要决定时，你更依赖？</span></div>
+      <div class="opts" data-group="q5" data-correct="A">
+        <label class="opt"><input type="checkbox" name="q5" value="A"><span class="opt-letter">A</span><span class="opt-text">客观的逻辑、数据与可行性分析</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="B"><span class="opt-letter">B</span><span class="opt-text">身边人的感受和人际关系的和谐</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="C"><span class="opt-letter">C</span><span class="opt-text">当下的气氛和大家的风向</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="D"><span class="opt-letter">D</span><span class="opt-text">一时兴起的灵感</span></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="q-head"><span class="q-no">6</span><span class="q-title">对规则和流程，你的态度是？</span></div>
+      <div class="opts" data-group="q6" data-correct="B">
+        <label class="opt"><input type="checkbox" name="q6" value="A"><span class="opt-letter">A</span><span class="opt-text">规则就是束缚，越自由越好</span></label>
+        <label class="opt"><input type="checkbox" name="q6" value="B"><span class="opt-letter">B</span><span class="opt-text">高效的规则应当遵守，低效的会主动去改进</span></label>
+        <label class="opt"><input type="checkbox" name="q6" value="C"><span class="opt-letter">C</span><span class="opt-text">严格照章办事，从不质疑</span></label>
+        <label class="opt"><input type="checkbox" name="q6" value="D"><span class="opt-letter">D</span><span class="opt-text">对规则基本没概念</span></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="q-head"><span class="q-no">7</span><span class="q-title">一个完全自由支配的周末，你多半会？</span></div>
+      <div class="opts" data-group="q7" data-correct="A">
+        <label class="opt"><input type="checkbox" name="q7" value="A"><span class="opt-letter">A</span><span class="opt-text">独自研究感兴趣的主题，或为未来做规划</span></label>
+        <label class="opt"><input type="checkbox" name="q7" value="B"><span class="opt-letter">B</span><span class="opt-text">安排满各种聚会和热闹活动</span></label>
+        <label class="opt"><input type="checkbox" name="q7" value="C"><span class="opt-letter">C</span><span class="opt-text">约一群人逛街、闲聊打发时间</span></label>
+        <label class="opt"><input type="checkbox" name="q7" value="D"><span class="opt-letter">D</span><span class="opt-text">什么都不想，随性地过</span></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="q-head"><span class="q-no">8</span><span class="q-title">当有人情绪激动地向你倾诉时，你倾向于？</span></div>
+      <div class="opts" data-group="q8" data-correct="B">
+        <label class="opt"><input type="checkbox" name="q8" value="A"><span class="opt-letter">A</span><span class="opt-text">立刻被对方的情绪带着走</span></label>
+        <label class="opt"><input type="checkbox" name="q8" value="B"><span class="opt-letter">B</span><span class="opt-text">保持冷静，先厘清问题的本质再想办法解决</span></label>
+        <label class="opt"><input type="checkbox" name="q8" value="C"><span class="opt-letter">C</span><span class="opt-text">用更激动的情绪回应对方</span></label>
+        <label class="opt"><input type="checkbox" name="q8" value="D"><span class="opt-letter">D</span><span class="opt-text">干脆躲开，不回应</span></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="q-head"><span class="q-no">9</span><span class="q-title">对于遥远的未来，你的看法是？</span></div>
+      <div class="opts" data-group="q9" data-correct="A">
+        <label class="opt"><input type="checkbox" name="q9" value="A"><span class="opt-letter">A</span><span class="opt-text">值得提前规划，并为之长期布局</span></label>
+        <label class="opt"><input type="checkbox" name="q9" value="B"><span class="opt-letter">B</span><span class="opt-text">只看眼前，未来到了再说</span></label>
+        <label class="opt"><input type="checkbox" name="q9" value="C"><span class="opt-letter">C</span><span class="opt-text">未来靠命运，规划也没用</span></label>
+        <label class="opt"><input type="checkbox" name="q9" value="D"><span class="opt-letter">D</span><span class="opt-text">那是别人该操心的事</span></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="q-head"><span class="q-no">10</span><span class="q-title">当别人有理有据地反驳你的观点时，你会？</span></div>
+      <div class="opts" data-group="q10" data-correct="B">
+        <label class="opt"><input type="checkbox" name="q10" value="A"><span class="opt-letter">A</span><span class="opt-text">为了和气，立刻改口附和</span></label>
+        <label class="opt"><input type="checkbox" name="q10" value="B"><span class="opt-letter">B</span><span class="opt-text">用逻辑和证据回应；若对方确实更有理，就接受</span></label>
+        <label class="opt"><input type="checkbox" name="q10" value="C"><span class="opt-letter">C</span><span class="opt-text">感到冒犯，中断交流</span></label>
+        <label class="opt"><input type="checkbox" name="q10" value="D"><span class="opt-letter">D</span><span class="opt-text">完全无所谓，敷衍过去</span></label>
+      </div>
+    </div>
+
+    <button type="button" class="submit" id="submitBtn">提交</button>
+  </form>
+
+  <div class="result" id="result">
+    <div class="rate" id="rate"></div>
+    <div class="sub" id="sub"></div>
+    <div class="msg" id="msg"></div>
+    <button type="button" class="reset" id="resetBtn">重新作答</button>
+  </div>
+
+  <footer>INTJ · The Architect（策划者 / 战略家型人格）</footer>
+</div>
+
+<script>
+(function(){
+  var groups = document.querySelectorAll('.opts');
+  // 单选行为：勾选一个，同组其余取消勾选，并高亮当前项
+  groups.forEach(function(g){
+    var boxes = g.querySelectorAll('input[type=checkbox]');
+    boxes.forEach(function(box){
+      box.addEventListener('change', function(){
+        if(box.checked){
+          boxes.forEach(function(other){
+            if(other !== box){ other.checked = false; other.closest('label.opt').classList.remove('sel'); }
+          });
+          box.closest('label.opt').classList.add('sel');
+        }else{
+          box.closest('label.opt').classList.remove('sel');
+        }
+      });
+    });
+  });
+
+  var submitBtn = document.getElementById('submitBtn');
+  var resetBtn  = document.getElementById('resetBtn');
+  var resultEl  = document.getElementById('result');
+
+  submitBtn.addEventListener('click', function(){
+    var correct = 0, answered = 0;
+    groups.forEach(function(g){
+      var answer = g.getAttribute('data-correct');
+      var checked = g.querySelector('input[type=checkbox]:checked');
+      if(checked){
+        answered++;
+        if(checked.value === answer) correct++;
+      }
+    });
+    var rate = Math.round(correct / 10 * 100);
+    var rateEl = document.getElementById('rate');
+    var subEl  = document.getElementById('sub');
+    var msgEl  = document.getElementById('msg');
+
+    rateEl.textContent = '正确率：' + rate + '%';
+    subEl.textContent  = '答对 ' + correct + ' / 10 题' + (answered < 10 ? '（有 ' + (10 - answered) + ' 题未作答）' : '');
+
+    resultEl.classList.remove('ok','mid','low');
+    if(correct >= 9){
+      msgEl.textContent = '恭喜你获得INTJ教授资格 🎓';
+      resultEl.classList.add('ok');
+    }else if(correct >= 7){
+      msgEl.textContent = '研究员同志尚需努力 💪';
+      resultEl.classList.add('mid');
+    }else{
+      msgEl.textContent = '很遗憾，您未能获得研究员资格！😔';
+      resultEl.classList.add('low');
+    }
+    resultEl.classList.add('show');
+    resultEl.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  resetBtn.addEventListener('click', function(){
+    groups.forEach(function(g){
+      g.querySelectorAll('input[type=checkbox]').forEach(function(box){
+        box.checked = false; box.closest('label.opt').classList.remove('sel');
+      });
+    });
+    resultEl.classList.remove('show');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>
